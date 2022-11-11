@@ -1,12 +1,13 @@
-from summa import Laskin
+from levenshtein import Levenshtein
+from dictionary import TrieNode
 
 def main():
-    x = 10
-    y = 9
-    laskin = Laskin()
+    dictionary = TrieNode()
+    for word in ['testi', 'sanasto', 'tässä', 'hei']:
+        dictionary.insert( word )
 
-    z = laskin._laske_summa(x,y)
-    print(z)
+    calculator = Levenshtein(dictionary)
+    calculator.execute()
 
 if __name__ == "__main__":
     main()

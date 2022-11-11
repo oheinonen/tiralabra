@@ -1,4 +1,6 @@
 # Tiralabra - Kirjoitusvirheiden korjaaja
+![GHA workload badge](https://github.com/oheinonen/tiralabra/workflows/CI/badge.svg)
+
 Tässä repositoriossa on Helsingin yliopiston tiralabra kurssille tehty ohjelma kirjoitusvirheiden korjaamiseen.
 
 ## Dokumentaatio

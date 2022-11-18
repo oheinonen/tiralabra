@@ -1,31 +1,33 @@
 import unittest
 from levenshtein import Levenshtein
+from dictionary import TrieNode
+DICTIONARY = "./words.txt"
 
+class StubIO:
+    def __init__(self, inputs):
+        self.inputs = inputs
+        self.outputs = []
 
-class StubDictionary:
-    def __init__(self):
-        self.word = None
-        self.children = {}
+    def read(self, text):
+        return self.inputs.pop(0)
 
-    def insert( self, word ):
-        node = self
-        for letter in word:
-            if letter not in node.children: 
-                node.children[letter] = StubDictionary()
-
-            node = node.children[letter]
-
-        node.word = word
-
-
+    def write(self, text):
+        self.outputs.append(text)
+    
 class TestLevenshtein(unittest.TestCase):
+    def setUp(self):
+        self.test_word = 'humle'
+        self.dictionary = TrieNode()
+        self.io = StubIO([self.test_word])
+        for word in open(DICTIONARY, "rt").read().split():
+                self.dictionary.insert( word.split()[0].lower() )
+        self.calculator = Levenshtein(self.dictionary, self.io)
 
-    def test_calculates_distance_correctly(self):
-        dictionary = StubDictionary()
-        for word in ['testi', 'sanasto', 'tässä', 'hei']:
-            dictionary.insert( word )
+    def test_search_returns_correct_words_one_edit(self):
+        results = self.calculator.search(self.test_word, 1)
+        self.assertEqual(len(results), 2)
+        self.assertListEqual(results, ['humble', 'hume'])
 
-        calculator = Levenshtein(dictionary)
-        res = calculator.search('sana')
-        self.assertEqual(res[0][0], 'sanasto')
-        self.assertEqual(res[0][1], 3)
+    def test_search_returns_correct_words_two_edits(self):
+        results = self.calculator.search(self.test_word, 2)
+        self.assertEqual(len(results), 95)

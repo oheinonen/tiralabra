@@ -3,23 +3,16 @@ class Levenshtein:
     ''' Luokan avulla lasketaan Levenshteinin etäisyys syötteenä
     saadun sanan sekä trie-tietorakeenteen sanojen välille
     '''
-    def __init__(self, dictionary):
+    def __init__(self, dictionary, io):
         ''' Luokan konstruktori joka saa parametrikseen käytetyn sanaston'''
-        self.dictionary = dictionary
+        self._dictionary = dictionary
+        self._io = io
 
-    def execute(self):
-        ''' Pääfunktio, joka saa käyttäjältä syötteen,
-        määrittää lähimmät vaihtoehdot ja tulostaa ne käyttäjälle.'''
-        word = input('Sana: \n')
-        results = self.search(word)
-        results.sort(key=lambda tuple: tuple[1])
-        print('Sanastossa kolme lähintä sanaa:')
-        for num in range(3):
-            print(f'{results[num][0]}: Levenshtein etäisyys { results[num][1]}')
 
-    def search(self, word ):
+    def search(self, word, max_cost ):
         '''Hakufunktio palauttaa listan pareja, jotka sisältävät jokaisen
-        sanaston sanan sekä tämän Levenshtein-etäisyyden haettuun sanaan'''
+        sanaston sanan jonka Levenshtein etäisyys on korkeintaan parametrina
+        max_cost annettu kynnysarvo'''
 
         # alustaa Levenshteinin matriisin
         current_row = range( len(word) + 1 )
@@ -27,15 +20,13 @@ class Levenshtein:
         results = []
 
         # laskee rekursiivisesti etäisyyden jokaiselle sanaston sanalle
-        for letter in self.dictionary.children:
-            self.search_recursive( self.dictionary.children[letter], letter, word, current_row,
-            results )
+        for letter in self._dictionary.children:
+            self.search_recursive( self._dictionary.children[letter], letter, word, current_row,
+            results, max_cost)
 
-        # tulokset järjestetään etäisyyden mukaan
-        results.sort(key=lambda x: x[1])
         return results
 
-    def search_recursive(self, node, letter, word, previous_row, results ):
+    def search_recursive(self, node, letter, word, previous_row, results, max_cost):
         '''Rekursiivinen apufunktio haun toteutukselle'''
         columns = len( word ) + 1
         # Levenshtein etäisyys ensimmäisessä kolumnissa on aina yhtä kuin
@@ -56,12 +47,14 @@ class Levenshtein:
 
             current_row.append( min( insert_cost, delete_cost, replace_cost ) )
 
-        # jos kyseinen solmu on sana, se talletetaan
-        if node.word is not None:
-            results.append( (node.word, current_row[-1] ) )
+        # jos kyseinen solmu on sana ja rivin viimeinen sarake (joka kuvastaa muutosten määrää)
+        # arvoltaan kynnysarvoa pienempi, se talletetaan
+        if current_row[-1] <= max_cost and node.word is not None:
+            results.append(node.word)
 
         # rekursiivista hakua jatketaan solmun lapsille, jotta saadaan kaikkien
-        # sanojen etäisyys laskettua
-        for next_letter in node.children:
-            self.search_recursive( node.children[next_letter], next_letter, word, current_row,
-                results )
+        # sanojen etäisyys laskettua. hakua ei jatketa jos kynnysarvo on ylittynyt
+        if min( current_row ) <= max_cost:
+            for next_letter in node.children:
+                self.search_recursive( node.children[next_letter], next_letter, word, current_row,
+                    results, max_cost )

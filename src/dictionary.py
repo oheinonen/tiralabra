@@ -20,3 +20,14 @@ class TrieNode:
             node = node.children[letter]
 
         node.word = word
+
+    def search(self, word):
+        node = self
+        length = len(word)
+        for level in range(length):
+            next_char = word[level]
+            if not next_char in node.children:
+                return None
+            node = node.children[next_char]
+ 
+        return node.word

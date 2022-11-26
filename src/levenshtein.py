@@ -21,12 +21,12 @@ class Levenshtein:
 
         # laskee rekursiivisesti etäisyyden jokaiselle sanaston sanalle
         for letter in self._dictionary.children:
-            self.search_recursive( self._dictionary.children[letter], letter, word, current_row,
+            self.search_recursive( self._dictionary.children[letter], letter,'', word, current_row,
             results, max_cost)
 
         return results
 
-    def search_recursive(self, node, letter, word, previous_row, results, max_cost):
+    def search_recursive(self, node, letter, previous_letter, word, previous_row, results, max_cost):
         '''Rekursiivinen apufunktio haun toteutukselle'''
         columns = len( word ) + 1
         # Levenshtein etäisyys ensimmäisessä kolumnissa on aina yhtä kuin
@@ -45,7 +45,12 @@ class Levenshtein:
             else:
                 replace_cost = previous_row[ column - 1 ]
 
-            current_row.append( min( insert_cost, delete_cost, replace_cost ) )
+            if word[column - 2] == letter and word[column - 1] == previous_letter:
+                transpose_cost = previous_row[ column - 1 ] 
+            else:
+                transpose_cost = previous_row[ column - 1 ] + 1
+
+            current_row.append( min( insert_cost, delete_cost, replace_cost, transpose_cost) )
 
         # jos kyseinen solmu on sana ja rivin viimeinen sarake (joka kuvastaa muutosten määrää)
         # arvoltaan kynnysarvoa pienempi, se talletetaan
@@ -56,5 +61,5 @@ class Levenshtein:
         # sanojen etäisyys laskettua. hakua ei jatketa jos kynnysarvo on ylittynyt
         if min( current_row ) <= max_cost:
             for next_letter in node.children:
-                self.search_recursive( node.children[next_letter], next_letter, word, current_row,
+                self.search_recursive( node.children[next_letter], next_letter, letter, word, current_row,
                     results, max_cost )

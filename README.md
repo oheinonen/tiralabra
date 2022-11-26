@@ -8,5 +8,7 @@ Sanastona toimiva words.txt tiedosto peräisin [täältä](http://norvig.com/ngr
 - [Viikkoraportti 1](https://github.com/oheinonen/tiralabra/blob/main/dokumentaatio/viikkoraportti1.md)
 - [Viikkoraportti 2](https://github.com/oheinonen/tiralabra/blob/main/dokumentaatio/viikkoraportti2.md)
 - [Viikkoraportti 3](https://github.com/oheinonen/tiralabra/blob/main/dokumentaatio/viikkoraportti3.md)
+- [Viikkoraportti 4](https://github.com/oheinonen/tiralabra/blob/main/dokumentaatio/viikkoraportti4.md)
 - [Määrittelydokumentti](https://github.com/oheinonen/tiralabra/blob/main/dokumentaatio/maarittely.md)
 - [Testausdokumentti](https://github.com/oheinonen/tiralabra/blob/main/dokumentaatio/testaus.md)
+- [Toteutusdokumentti](https://github.com/oheinonen/tiralabra/blob/main/dokumentaatio/toteutus.md)

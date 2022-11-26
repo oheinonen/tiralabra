@@ -1,7 +1,7 @@
 import unittest
 from levenshtein import Levenshtein
 from dictionary import TrieNode
-DICTIONARY = "./words.txt"
+WORDS = "./frequency_dictionary_en_82_765.txt"
 
 class StubIO:
     def __init__(self, inputs):
@@ -19,7 +19,7 @@ class TestLevenshtein(unittest.TestCase):
         self.test_word = 'humle'
         self.dictionary = TrieNode()
         self.io = StubIO([self.test_word])
-        for word in open(DICTIONARY, "rt").read().split():
+        for word in open(WORDS, "rt").read().split():
                 self.dictionary.insert( word.split()[0].lower() )
         self.calculator = Levenshtein(self.dictionary, self.io)
 

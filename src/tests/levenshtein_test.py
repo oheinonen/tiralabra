@@ -30,4 +30,4 @@ class TestLevenshtein(unittest.TestCase):
 
     def test_search_returns_correct_words_two_edits(self):
         results = self.calculator.search(self.test_word, 2)
-        self.assertEqual(len(results), 95)
+        self.assertEqual(len(results), 70)

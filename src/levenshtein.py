@@ -3,10 +3,9 @@ class Levenshtein:
     ''' Luokan avulla lasketaan Levenshteinin etäisyys syötteenä
     saadun sanan sekä trie-tietorakeenteen sanojen välille
     '''
-    def __init__(self, dictionary, io):
+    def __init__(self, dictionary):
         ''' Luokan konstruktori joka saa parametrikseen käytetyn sanaston'''
         self._dictionary = dictionary
-        self._io = io
 
 
     def search(self, word, max_cost ):

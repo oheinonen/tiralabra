@@ -1,33 +1,24 @@
-''' Moduuli trie-tietorakenteen ylläpitoon'''
-class TrieNode:
-    ''' Trienode luokkaa käytetään sanojen tallettamiseen.
-    Kirjaimet ovat solmuja, ja niiden lapset seuraavia mahdollisia
-    kirjaimia sanassa. Jos solmu on jonkin sanan viimeinen kirjain,
-    talletetaan tieto solmuun.
-    '''
-    def __init__(self):
-        '''Luokan konstruktori'''
-        self.word = None
-        self.children = {}
+from trienode import TrieNode
 
-    def insert( self, word ):
-        '''Funktio sanan lisäämiseen sanastoon. Lisää sanan tietorakenteeseen
-        kirjain kerrallaan ja luo tarvittaessa uusia solmuja'''
-        node = self
-        for letter in word:
-            if letter not in node.children:
-                node.children[letter] = TrieNode()
-            node = node.children[letter]
+WORDS = "./frequency_dictionary_en_82_765.txt"
+BIGRAMS = "./frequency_bigramdictionary_en_243_342.txt"
 
-        node.word = word
+def initialize_dictionary():
+    dictionary = TrieNode()
+    for word in open(WORDS, "rt").read().split('\n'):
+        dictionary.insert( word.split()[0] )
+    return dictionary
 
-    def search(self, word):
-        node = self
-        length = len(word)
-        for level in range(length):
-            next_char = word[level]
-            if not next_char in node.children:
-                return None
-            node = node.children[next_char]
- 
-        return node.word
+def initialize_word_count():
+    word_count = {}
+    for word in open(WORDS, "rt").read().split('\n'):
+        word_count[word.split()[0]] = int(word.split()[1])
+    return word_count
+
+def initialize_bigram_count():
+    bigram_count = {}
+    for bigram in open(BIGRAMS, "rt").read().split('\n'):
+        if bigram:
+            bigram_splitted = bigram.split(' ')
+            bigram_count[(bigram_splitted[0], bigram_splitted[1])] = int(bigram_splitted[2])
+    return bigram_count

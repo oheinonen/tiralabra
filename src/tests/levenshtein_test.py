@@ -1,6 +1,6 @@
 import unittest
 from levenshtein import Levenshtein
-from dictionary import TrieNode
+from trienode import TrieNode
 WORDS = "./frequency_dictionary_en_82_765.txt"
 
 class StubIO:

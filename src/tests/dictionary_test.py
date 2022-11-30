@@ -1,5 +1,5 @@
 import unittest
-from dictionary import TrieNode
+from trienode import TrieNode
 
 class TestDictionary(unittest.TestCase):
     def setUp(self):

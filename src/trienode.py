@@ -22,6 +22,8 @@ class TrieNode:
         node.word = word
 
     def search(self, word):
+        ''' Funktio sanan hakemiseen sanastosta. Palauttaa None mikäli sanaa
+        ei ole lisätty sanastoon'''
         node = self
         length = len(word)
         for level in range(length):

@@ -31,5 +31,4 @@ class TrieNode:
             if not next_char in node.children:
                 return None
             node = node.children[next_char]
- 
         return node.word

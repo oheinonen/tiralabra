@@ -25,7 +25,8 @@ class Levenshtein:
 
         return results
 
-    def search_recursive(self, node, letter, previous_letter, word, previous_row, results, max_cost):
+    def search_recursive(
+            self, node, letter, previous_letter, word, previous_row, results, max_cost):
         '''Rekursiivinen apufunktio haun toteutukselle'''
         columns = len( word ) + 1
         # Levenshtein etäisyys ensimmäisessä kolumnissa on aina yhtä kuin
@@ -45,7 +46,7 @@ class Levenshtein:
                 replace_cost = previous_row[ column - 1 ]
 
             if word[column - 2] == letter and word[column - 1] == previous_letter:
-                transpose_cost = previous_row[ column - 1 ] 
+                transpose_cost = previous_row[ column - 1 ]
             else:
                 transpose_cost = previous_row[ column - 1 ] + 1
 
@@ -60,5 +61,5 @@ class Levenshtein:
         # sanojen etäisyys laskettua. hakua ei jatketa jos kynnysarvo on ylittynyt
         if min( current_row ) <= max_cost:
             for next_letter in node.children:
-                self.search_recursive( node.children[next_letter], next_letter, letter, word, current_row,
-                    results, max_cost )
+                self.search_recursive( node.children[next_letter], next_letter, letter,
+                    word, current_row, results, max_cost )

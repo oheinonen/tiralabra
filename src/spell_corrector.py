@@ -30,8 +30,9 @@ class SpellCorrector():
             correct = ''
             for result in sorted(filter(lambda x: x[1] <= MAX_TYPOS_IN_SENTENCE, probabilities),
                 key=lambda x: x[0], reverse=True)[:10]:
-                correct = self._io.read(f'Tarkoititko "{result[2]}" (y/n)? \n')
+                correct = self._io.read(f'Tarkoititko "{result[2]}" (y/n)?\n')
                 if correct == 'y':
+                    self._io.write(f'Lauseen oikea kirjoitusmuoto "{result[2]}"')
                     break
             if correct != 'y':
                 self._io.write('Lausetta ei löytynyt')

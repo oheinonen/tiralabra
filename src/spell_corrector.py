@@ -87,7 +87,7 @@ class SpellCorrector():
     def count_changes_in_sentence(self, sentence1, sentence2):
         ''' Laskee kahden lauseen väliset erot.'''
         result = 0
-        for i in enumerate(sentence1):
+        for (i, word) in enumerate(sentence1):
             if not sentence1[i] == sentence2[i]:
                 result += 1
         return result

@@ -1,6 +1,6 @@
 import unittest
 from levenshtein import Levenshtein
-from dictionary import initialize_dictionary
+from dictionary import Dictionary
 
 class StubIO:
     def __init__(self, inputs):
@@ -16,7 +16,7 @@ class StubIO:
 class TestLevenshtein(unittest.TestCase):
     def setUp(self):
         self.test_word = 'humle'
-        self.dictionary = initialize_dictionary()
+        self.dictionary = Dictionary()
         self.io = StubIO([self.test_word])
         self.calculator = Levenshtein(self.dictionary)
 

@@ -5,7 +5,7 @@ class Levenshtein:
     '''
     def __init__(self, dictionary):
         ''' Luokan konstruktori joka saa parametrikseen käytetyn sanaston'''
-        self._dictionary = dictionary
+        self._dictionary = dictionary._root
 
 
     def search(self, word, max_cost ):

@@ -1,22 +1,19 @@
 import itertools
-from dictionary import initialize_word_count,initialize_bigram_count
 MAX_TYPOS_IN_WORD = 1
 MAX_TYPOS_IN_SENTENCE = 2
 
 class SpellCorrector():
-    def __init__(self, io, calculator):
+    def __init__(self, io, calculator, dictionary):
         ''' Luokan konstruktori
 
         Parametrit:
         io: lukemiseen ja tulostamiseen käytettävä luokka
         calculator: Levenshtein-etäsyyden laskemiseen käytettävä luokka
+        dictionary: Sanastoa ylläpitävä ja käyttävä luokka
         '''
         self._io = io
         self._calculator = calculator
-        # Hakemistot sekä yksittäisten sanojen että sanaparien yleisyyden saamiseksi
-        self._word_count = initialize_word_count()
-        self._bigram_count = initialize_bigram_count()
-        self._total_words = sum(self._word_count.values())
+        self._dictionary = dictionary
 
     def run(self):
         ''' Oikeinkirjoituskorjaajan pääfunktio. Saa käyttäjältä tarkastettavan lauseen,
@@ -64,25 +61,10 @@ class SpellCorrector():
         '''
         results = []
         for sentence in sentences:
-            score = self.count_sentence_probability(sentence)
+            score = self._dictionary.count_sentence_probability(sentence)
             nof_changes = self.count_changes_in_sentence(sentence, original_sentence)
             results.append((score, nof_changes, self.tuple_to_string(sentence)))
         return results
-
-    def count_sentence_probability(self, sentence):
-        ''' Laskee lauseelle todennäköisyyden perustuen siinä esiintyvien
-        sanojen ja sanaparien yleisyyteen.
-
-        Parametrit:
-        sentence: lause (lista sanoja) jolle todennäköisyys lasketaan
-        '''
-        result = 0
-        for i in range(0, len(sentence) - 1):
-            bigram_count = self._bigram_count[(sentence[i], sentence[i + 1])]\
-                if (sentence[i], sentence[i + 1]) in self._bigram_count else 0
-            word_count = self._word_count[sentence[i]] if sentence[i] in self._word_count else 1
-            result += bigram_count/(self._total_words + word_count) + word_count/self._total_words
-        return result
 
     def count_changes_in_sentence(self, sentence1, sentence2):
         ''' Laskee kahden lauseen väliset erot.'''

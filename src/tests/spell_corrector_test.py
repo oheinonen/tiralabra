@@ -1,5 +1,6 @@
 import unittest
 from spell_corrector import SpellCorrector
+from dictionary import Dictionary
 from unittest.mock import Mock, ANY
 
 class StubIO:
@@ -16,8 +17,9 @@ class StubIO:
 class TestSpellCorrector(unittest.TestCase):
     def setUp(self):
         self._io = StubIO([])
+        self._dictionary = Dictionary()
         self._calculator_mock = Mock()
-        self._spellcorrector = SpellCorrector(self._io, self._calculator_mock)
+        self._spellcorrector = SpellCorrector(self._io, self._calculator_mock, self._dictionary)
 
     def test_changes_in_sentence_is_zero_if_there_are_no_different_words(self):
         sentence = 'Here is no typos'.split(' ')

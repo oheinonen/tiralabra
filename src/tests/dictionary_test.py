@@ -1,20 +1,15 @@
 import unittest
-from trienode import TrieNode
+from dictionary import Dictionary
+from unittest.mock import Mock, ANY
 
 class TestDictionary(unittest.TestCase):
     def setUp(self):
-        self.word = 'testword'
-        self.initial_word = 'initialWord'
-        self.dictionary = TrieNode()
-        self.dictionary.insert(self.initial_word)
+        self.dictionary = Dictionary()
 
-    def test_search_returns_word_if_in_dictionary(self):
-        self.dictionary.search(self.initial_word)
-        self.assertEqual(self.initial_word, self.dictionary.search(self.initial_word))
-
-    def test_search_returns_none_if_not_in_dictionary(self):
-        self.assertIsNone(self.dictionary.search(self.word))
-
-    def test_added_word_is_in_dictionary(self):
-        self.dictionary.insert(self.word)
-        self.assertEqual(self.word, self.dictionary.search(self.word))
+    def test_sentence_probability_is_zero_when_words_are_not_in_dictionary(self):
+        probability = self.dictionary.count_sentence_probability('sanat eivat sanastossa'.split(' '))
+        self.assertEqual(probability, 0)
+    
+    def test_sentence_probability_is_between_zero_and_one_if_at_least_one_word_is_in_dictionary(self):
+        probability = self.dictionary.count_sentence_probability('these words exist'.split(' '))
+        self.assertTrue(0 <= probability, probability <= 1)

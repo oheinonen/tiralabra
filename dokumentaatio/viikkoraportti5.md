@@ -1,7 +1,7 @@
 # Viikkoraportti 5
 
 ## Mitä olen tehnyt tällä viikolla?
-Refaktorointia ja dokumentointia koodiin. Kattavat yksikkötestit. 
+Refaktorointia ja dokumentointia koodiin. Kattavat yksikkötestit. Aikaa on kulunut noin kuusi tuntia (ei sis. vertaisarviontiin käytettyä aikaa)
 
 ## Miten ohjelma on edistynyt?
 Ohjelma on pysynyt ennallaan. Koodi toivottavasti huomattavasti helppolukuisempaa

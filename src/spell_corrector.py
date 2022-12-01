@@ -3,15 +3,16 @@ MAX_TYPOS_IN_WORD = 1
 MAX_TYPOS_IN_SENTENCE = 2
 
 class SpellCorrector():
-    def __init__(self, io, calculator, dictionary):
+    '''Luokka ohjelman päätoiminnoille'''
+    def __init__(self, console_io, calculator, dictionary):
         ''' Luokan konstruktori
 
         Parametrit:
-        io: lukemiseen ja tulostamiseen käytettävä luokka
+        console_io: lukemiseen ja tulostamiseen käytettävä luokka
         calculator: Levenshtein-etäsyyden laskemiseen käytettävä luokka
         dictionary: Sanastoa ylläpitävä ja käyttävä luokka
         '''
-        self._io = io
+        self._console_io = console_io
         self._calculator = calculator
         self._dictionary = dictionary
 
@@ -19,25 +20,26 @@ class SpellCorrector():
         ''' Oikeinkirjoituskorjaajan pääfunktio. Saa käyttäjältä tarkastettavan lauseen,
         ja esittää mahdollisia korjauksia hyödyntäen luokan muita metodeja.
         '''
-        input_sentence = self._io.read('Syötä lause jonka oikeikirjoituksen haluat tarkastaa: \n') \
-            .split(' ')
-        while(input_sentence[0]):
+        input_sentence = self._console_io\
+            .read('Syötä lause jonka oikeikirjoituksen haluat tarkastaa: \n').split(' ')
+        while input_sentence[0]:
             candidates = self.get_candidates_for_words(input_sentence)
-            # muodosta sanoista kaikki mahdolliset permutaatiot (= 'korjatut' lauseet)
+            # Muodostaa sanoista kaikki mahdolliset permutaatiot (= 'korjatut' lauseet)
             candidate_sentences = list(itertools.product(*candidates))
             probabilities = self.get_sentence_probabilities(candidate_sentences, input_sentence)
             # Näytetään käyttäjälle 10 todennäköisinta sanaa
             correct = ''
             for result in sorted(filter(lambda x: x[1] <= MAX_TYPOS_IN_SENTENCE, probabilities),
                 key=lambda x: x[0], reverse=True)[:10]:
-                correct = self._io.read(f'Tarkoititko "{result[2]}" (y/n)?\n')
+                correct = self._console_io.read(f'Tarkoititko "{result[2]}" (y/n)?\n')
                 if correct == 'y':
-                    self._io.write(f'Lauseen oikea kirjoitusmuoto "{result[2]}"')
+                    self._console_io.write(f'Lauseen oikea kirjoitusmuoto "{result[2]}"')
                     break
             if correct != 'y':
-                self._io.write('Lausetta ei löytynyt')
-            input_sentence = self._io.read('Uusi lause (poistu tyhjällä syötteellä): \n').split(' ')
-        self._io.write('hei hei')
+                self._console_io.write('Lausetta ei löytynyt')
+            input_sentence = self._console_io.read('Uusi lause (poistu tyhjällä syötteellä): \n')\
+                .split(' ')
+        self._console_io.write('hei hei')
 
     def get_candidates_for_words(self, list_of_words):
         ''' Muodostaa kullekin sanalistan sanalle listan vaihtoehtoisia sanoja,
@@ -70,7 +72,7 @@ class SpellCorrector():
     def count_changes_in_sentence(self, sentence1, sentence2):
         ''' Laskee kahden lauseen väliset erot.'''
         result = 0
-        for (i, word) in enumerate(sentence1):
+        for (i, _) in enumerate(sentence1):
             if not sentence1[i] == sentence2[i]:
                 result += 1
         return result

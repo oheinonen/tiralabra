@@ -34,12 +34,12 @@ class Dictionary:
         sentence: lause (lista sanoja) jolle todennäköisyys lasketaan
         '''
         result = 0
-        for i in range(0, len(sentence)):
+        for (i, _) in enumerate(sentence):
             word = sentence[i]
             word_count = self._word_counts[word] if word in self._word_counts else 0
             word_probability = word_count/self._total_words
             result += word_probability
         return result
-    
+
     def search(self, word):
         return self._root.search(word)

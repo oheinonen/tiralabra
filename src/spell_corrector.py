@@ -27,10 +27,10 @@ class SpellCorrector():
             # Muodostaa sanoista kaikki mahdolliset permutaatiot (= 'korjatut' lauseet)
             candidate_sentences = list(itertools.product(*candidates))
             probabilities = self.get_sentence_probabilities(candidate_sentences, input_sentence)
-            # Näytetään käyttäjälle 10 todennäköisinta sanaa
+            # Näytetään käyttäjälle viisi todennäköisinta lausetta
             correct = ''
             for result in sorted(filter(lambda x: x[1] <= MAX_TYPOS_IN_SENTENCE, probabilities),
-                key=lambda x: x[0], reverse=True)[:10]:
+                key=lambda x: x[0], reverse=True)[:5]:
                 correct = self._console_io.read(f'Tarkoititko "{result[2]}" (y/n)?\n')
                 if correct == 'y':
                     self._console_io.write(f'Lauseen oikea kirjoitusmuoto "{result[2]}"')
@@ -50,8 +50,10 @@ class SpellCorrector():
         '''
         candidates = []
         for word in list_of_words:
-            one_edit_words = self._calculator.search(word, MAX_TYPOS_IN_WORD)
-            candidates.append(one_edit_words)
+            candidates.append([word])
+            if not self._dictionary.search(word):
+                one_edit_words = self._calculator.search(word, MAX_TYPOS_IN_WORD)
+                candidates [-1] += one_edit_words
         return candidates
 
     def get_sentence_probabilities(self, sentences, original_sentence):
@@ -59,7 +61,7 @@ class SpellCorrector():
         luokan muita metodeja
 
         Parametrit:
-        sentences: lista lauseita (lause = lista sanoja))
+        sentences: liszta lauseita (lause = lista sanoja))
         original_sentence: alkuperäinen käyttäjän antama lause
         '''
         results = []
@@ -78,7 +80,7 @@ class SpellCorrector():
         return result
 
     def tuple_to_string(self, tup):
-        '''Muodostaa listamuotoisesta lauseesta string muotoisen'''
+        '''Muodostaa listamuotoisesta lauseesta merkkijonon'''
         sentence = ''
         for item in tup:
             sentence += item + ' '

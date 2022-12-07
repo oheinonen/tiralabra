@@ -1,5 +1,5 @@
 ## Ohjelman yleisrakenne
-Ohjelmassa on kolme luokkaa, `TrieNode`, `Levenshtein` ja `ConsoleIO` . `TrieNode` -luokkaa käytetään sanaston ylläpitoon ja `Levenshtein` -luokkaa siihen, että annetulle sanalle voidaan hakea vaihtoehtoiset sanat annetulla virhemarginaalilla. Erilaisia typoja, jotka ohjelma tarkastaa ovat
+Ohjelmassa on neljä luokkaa, `Dictionary`, `TrieNode`, `Levenshtein` ja `ConsoleIO` . `Dictionary` -luokkaa käytetään sanaston ylläpitoon ja käsittelyyn. `TrieNode` -luokkaa hyödynnetään sanaston tietorakenteena. `Levenshtein` -luokkaa siihen, että annetulle sanalle voidaan hakea vaihtoehtoiset sanat annetulla virhemarginaalilla. Erilaisia typoja, jotka ohjelma tarkastaa ovat
 1. kirjaimen poisto: _softwaree -> software_
 2. kirjaimen lisääminen: _softwre -> software_
 3. kirjaimen vaihto: _softwere -> software_

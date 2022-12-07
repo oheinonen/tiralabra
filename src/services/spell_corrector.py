@@ -23,7 +23,6 @@ class SpellCorrector():
         candidate_sentences = list(itertools.product(*candidates))
         probabilities = self.get_sentence_probabilities(candidate_sentences, input_sentence)
         # Näytetään käyttäjälle viisi todennäköisinta lausetta
-        correct = ''
         return sorted(filter(lambda x: x[1] <= MAX_TYPOS_IN_SENTENCE, probabilities),
             key=lambda x: x[0], reverse=True)[:5]
 
@@ -44,7 +43,7 @@ class SpellCorrector():
 
     def get_sentence_probabilities(self, sentences, original_sentence):
         ''' Laskee annetuille lauseille niiden todennäköisyyden ja typojen määrän hyödyntäen
-        luokan muita metodeja
+        metodeja
 
         Parametrit:
         sentences: liszta lauseita (lause = lista sanoja))

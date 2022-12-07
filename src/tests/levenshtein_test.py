@@ -1,5 +1,5 @@
 import unittest
-from levenshtein import Levenshtein
+from entities.levenshtein import Levenshtein
 from dictionary import Dictionary
 
 class StubIO:

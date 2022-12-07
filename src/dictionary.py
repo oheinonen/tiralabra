@@ -1,4 +1,4 @@
-from trienode import TrieNode
+from entities.trienode import TrieNode
 
 WORDS = "./frequency_dictionary_en_82_765.txt"
 

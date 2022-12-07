@@ -1,7 +1,7 @@
 import unittest
-from spell_corrector import SpellCorrector
+from services.spell_corrector import SpellCorrector
 from dictionary import Dictionary
-from levenshtein import Levenshtein
+from entities.levenshtein import Levenshtein
 from unittest.mock import Mock, ANY
 
 class StubIO:

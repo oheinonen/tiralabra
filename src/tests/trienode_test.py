@@ -1,5 +1,5 @@
 import unittest
-from trienode import TrieNode
+from entities.trienode import TrieNode
 
 class TestTrieNode(unittest.TestCase):
     def setUp(self):

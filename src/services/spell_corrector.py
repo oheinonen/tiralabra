@@ -1,6 +1,6 @@
 import itertools
 MAX_TYPOS_IN_WORD = 1
-MAX_TYPOS_IN_SENTENCE = 2
+MAX_TYPOS_IN_SENTENCE = 5
 
 class SpellCorrector():
     '''Luokka ohjelman päätoiminnoille'''
@@ -22,9 +22,9 @@ class SpellCorrector():
         # Muodostaa sanoista kaikki mahdolliset permutaatiot (= 'korjatut' lauseet)
         candidate_sentences = list(itertools.product(*candidates))
         probabilities = self.get_sentence_probabilities(candidate_sentences, input_sentence)
+        sentences_with_max_typos = filter(lambda x: x[1] <= MAX_TYPOS_IN_SENTENCE, probabilities)
         # Näytetään käyttäjälle viisi todennäköisinta lausetta
-        return sorted(filter(lambda x: x[1] <= MAX_TYPOS_IN_SENTENCE, probabilities),
-            key=lambda x: x[0], reverse=True)[:5]
+        return sorted(sentences_with_max_typos, key=lambda x: x[0], reverse=True)[:5]
 
     def get_candidates_for_words(self, list_of_words):
         ''' Muodostaa kullekin sanalistan sanalle listan vaihtoehtoisia sanoja,
@@ -53,7 +53,7 @@ class SpellCorrector():
         for sentence in sentences:
             score = self._dictionary.count_sentence_probability(sentence)
             nof_changes = self.count_changes_in_sentence(sentence, original_sentence)
-            results.append((score, nof_changes, self.tuple_to_string(sentence)))
+            results.append((score, nof_changes, sentence))
         return results
 
     def count_changes_in_sentence(self, sentence1, sentence2):
@@ -64,9 +64,3 @@ class SpellCorrector():
                 result += 1
         return result
 
-    def tuple_to_string(self, tup):
-        '''Muodostaa listamuotoisesta lauseesta merkkijonon'''
-        sentence = ''
-        for item in tup:
-            sentence += item + ' '
-        return sentence[:-1]

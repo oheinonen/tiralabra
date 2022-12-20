@@ -1,22 +1,10 @@
 import unittest
 from entities.levenshtein import Levenshtein
 from dictionary import Dictionary
-
-class StubIO:
-    def __init__(self, inputs):
-        self.inputs = inputs
-        self.outputs = []
-
-    def read(self, text):
-        return self.inputs.pop(0)
-
-    def write(self, text):
-        self.outputs.append(text)
     
 class TestLevenshtein(unittest.TestCase):
     def setUp(self):
         self.dictionary = Dictionary()
-        self.io = StubIO([self.test_word])
         self.calculator = Levenshtein(self.dictionary)
     
     def test_search_returns_correct_word_with_one_added_letter(self):

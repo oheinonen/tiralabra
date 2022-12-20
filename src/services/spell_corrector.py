@@ -1,6 +1,6 @@
 import itertools
 MAX_TYPOS_IN_WORD = 1
-MAX_TYPOS_IN_SENTENCE = 5
+MAX_TYPOS_IN_SENTENCE = 2
 
 class SpellCorrector():
     '''Luokka ohjelman päätoiminnoille'''

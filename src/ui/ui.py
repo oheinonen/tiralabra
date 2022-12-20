@@ -1,3 +1,5 @@
+from termcolor import colored
+
 class Ui():
     '''Luokka ohjelman päätoiminnoille'''
     def __init__(self, console_io, service):
@@ -33,10 +35,10 @@ class Ui():
                         candidate.append(result[2][i].title())
                     else:
                         candidate.append(result[2][i])
-                candidate = self.tuple_to_string(candidate)
+                candidate = self.format_candidate(input_sentence, candidate)
                 correct = self._console_io.read(f'Tarkoititko "{candidate}" (y/n)?\n')
                 if correct == 'y':
-                    self._console_io.write(f'Lauseen oikea kirjoitusmuoto "{candidate}"')
+                    self._console_io.write(f'Valitsit lauseen oikeaksi kirjoitusmuodoksi: "{candidate}"')
                     break
             if correct != 'y':
                 self._console_io.write('Lausetta ei löytynyt')
@@ -53,9 +55,12 @@ class Ui():
         self._console_io\
             .write('Tämän jälkeen voit halutessasi antaa uuden lauseen tai poistua ohjelmasta tyhjällä syötteellä.\n')
 
-    def tuple_to_string(self, tup):
-        '''Muodostaa listamuotoisesta lauseesta merkkijonon'''
+    def format_candidate(self, input_sentence, candidate):
+        '''Muodostaa listamuotoisesta lauseesta merkkijonon, ja esittää muokkaukset vihreällä värillä'''
         sentence = ''
-        for item in tup:
-            sentence += item + ' '
+        for i in range(len(candidate)):
+            if input_sentence[i] == candidate[i]:
+                sentence += candidate[i] + ' '
+            else:
+                sentence += colored(candidate[i],'green') + ' '
         return sentence[:-1]

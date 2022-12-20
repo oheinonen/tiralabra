@@ -1,5 +1,5 @@
 # Kirjoitusvirheiden korjaaja
-Projektin tarkoituksena on rakentaa algoritmi, joka kykenee korjaamaan kirjoitusvirheet annetusta tekstistä. Ohjelma saa syötteenä lauseen tekstiä. Ohjelma parsii lauseen sanoiksi, ja tarkastaa löytyvätkö kaikki sanat sanastosta. Jos sanaa ei löydy sanastosta, ohjelma korjaa sanan. Lopulta käyttäjälle tulostetaan korjattu teksti.
+Projektin tarkoituksena on rakentaa algoritmi, joka kykenee korjaamaan kirjoitusvirheet annetusta tekstistä. Ohjelma saa syötteenä lauseen tekstiä. Ohjelma parsii lauseen sanoiksi, ja tarkastaa löytyvätkö kaikki sanat sanastosta. Jos sanaa ei löydy sanastosta, ohjelma korjaa sanan. Lopulta käyttäjälle tulostetaan viisi ehdotusta järjestyksessä eri korjauksilla. 
 
 Ohjelma kirjoitetaan Pythonilla, jota hallitsen kyllin hyvin vertaisarvionteja ajatellen. Opinto-ohjelmani on tietojenkäsittelytieteen kandidaatti ja projektissa käytetty kieli suomi. 
 

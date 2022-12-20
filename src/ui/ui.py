@@ -18,7 +18,7 @@ class Ui():
         '''
         self.print_preface()
         input_sentence = self._console_io\
-            .read('Syötä lause jonka oikeikirjoituksen haluat tarkastaa: \n').split(' ')
+            .read('Syötä lause jonka oikeinkirjoituksen haluat tarkastaa: \n').split(' ')
         while input_sentence[0]:
             results = self._service.fix_sentence(list( map(lambda x: x.lower(), input_sentence) ) )
             self.show_results(input_sentence, results)

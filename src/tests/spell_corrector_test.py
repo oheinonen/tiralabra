@@ -64,7 +64,7 @@ class TestSpellCorrector(unittest.TestCase):
         spellcorrector = SpellCorrector(calculator, dictionary)
         ui = Ui(io, spellcorrector)
         ui.run()
-        self.assertTrue('Lauseen oikea kirjoitusmuoto "good morning"' in io.outputs)
+        self.assertTrue('Valitsit lauseen oikeaksi kirjoitusmuodoksi: "good morning"' in io.outputs)
     
     def test_spell_corrector_with_sentence_having_zero_matches(self):
         io = StubIO(['dfasdfas asdfasdfa','y', ''])
@@ -73,4 +73,4 @@ class TestSpellCorrector(unittest.TestCase):
         spellcorrector = SpellCorrector(calculator, dictionary)
         ui = Ui(io, spellcorrector)
         ui.run()
-        self.assertTrue('Lauseen oikea kirjoitusmuoto "dfasdfas asdfasdfa"'  in io.outputs)
+        self.assertTrue('Valitsit lauseen oikeaksi kirjoitusmuodoksi: "dfasdfas asdfasdfa"'  in io.outputs)

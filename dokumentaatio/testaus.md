@@ -38,6 +38,8 @@ Lauseissa, joissa ei ole montaa kirjoitusvirhettä ja joissa väärinkirjoitetut
 
 ![i_like_cding_but_haet_tetsing](https://github.com/oheinonen/tiralabra/blob/main/kuvat/i_like_cding_but_haet_tetsing.png)
 
+Tämän lisäksi tarpeeksi pitkällä lauseella ja virheiden määrällä (kun `MAX_TYPOS_IN_SENTENCE` asetettu suureksi) ohjelma hajoaa.
+
 Lisäksi ongelmia ovat esim.
 1. Sanaa ei ole sanastossa. Tällöin sitä ei voi löytyä.
 2. Väärinkirjoitettu sana on oikea sana. Tällöin ohjelma palauttaa anetun (virheellisen) sanan.

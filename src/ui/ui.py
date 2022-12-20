@@ -38,7 +38,7 @@ class Ui():
                 candidate = self.format_candidate(input_sentence, candidate)
                 correct = self._console_io.read(f'Tarkoititko "{candidate}" (y/n)?\n')
                 if correct == 'y':
-                    self._console_io.write(f'Valitsit lauseen oikeaksi kirjoitusmuodoksi: "{candidate}"')
+                    self._console_io.write(f'Valitsit lauseen oikeaksi kirjoitusmuodoksi: "{candidate}"\n')
                     break
             if correct != 'y':
                 self._console_io.write('Lausetta ei löytynyt')

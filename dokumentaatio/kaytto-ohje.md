@@ -12,4 +12,4 @@
 4. Tämän jälkeen voit antaa uuden lauseen, tai poistua painamalla enteriä.
 
 ### Maagisten numeroiden vaihtaminen
-Ohjelman `SpellCorrector`-luokassa on kaksi maagista numeroa; `MAX_TYPOS_IN_WORD` (oletus 1) ja `MAX_TYPOS_IN_SENTENCE` (oletus 2). Näitä muokkaamalla käyttäjä voi tehdä ohjelmasta itselleen sopivamman pohjautuen omaan näkemykseen typojen määrästä. Lukujen kasvattaminen hidastaa ohjelman toimivuutta, ja pienikin muutos näissä saattaa tehdä ohjelmasta käyttökelvottoman. Lisää aiheesta testausdokumentissa.
+Ohjelman `SpellCorrector`-luokassa on kaksi maagista numeroa; `MAX_TYPOS_IN_WORD` (oletus 1) ja `MAX_TYPOS_IN_SENTENCE` (oletus 3). Näitä muokkaamalla käyttäjä voi tehdä ohjelmasta itselleen sopivamman pohjautuen omaan näkemykseen typojen määrästä. Lukujen kasvattaminen hidastaa ohjelman toimivuutta, ja pienikin muutos näissä saattaa tehdä ohjelmasta käyttökelvottoman. Lisää aiheesta testausdokumentissa.

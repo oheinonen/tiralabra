@@ -6,10 +6,14 @@ Yksikkötestit voidaan toistaa komennolla `poetry run pytest`
 Testauksessa tarkistetaan, että todennäköisyys lauseen oikeinkirjoitukselle on nolla, mikäli mikään lauseen sanoista ei löydy sanastosta. Lisäksi testataan, että lauseen todennäköisyys on jotain väliltä 0...1, kun lauseen sanat ovat sanastossa.
 
 ### Trie-tietorakenne
-Testauksessa varmistetaan että sanastoon lisätty sana löytyy myöhemmin sanastosta.
+Testauksessa varmistetaan että sanastoon lisätty sana löytyy myöhemmin sanastosta, ja että sanaa joka ei ole sanastossa ei löydy sanastosta.
 
 ### Levenshtein etäisyyden laskija
-Testauksessa varmistetaan että luokan hakufunktio palauttaa kaikki sanat annetulla Levenshtein etäisyydellä syötesanasta.
+Testauksessa varmistetaan että luokan hakufunktio palauttaa kaikki sanat annetulla Levenshtein etäisyydellä syötesanasta. Lisäksi testauksessa varmistetaan, että haluttu sana löydetään, kun sanasta on 
+1. poistettu kirjain
+2. lisätty kirjain
+3. vaihdettu kirjain
+4. vaihdettu kahden vierekkäisen kirjaimen paikkaa.
 
 ### Spell Corrector / pääohjelma
 Testit varmistavat, että 

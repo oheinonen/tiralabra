@@ -45,7 +45,23 @@ Näiden typojen avulla lasketaan sanojen Damerau-Levenshtein etäisyys.
 Esim. sanojen _code_ ja _clown_ etäisyys on 3: __code->clode->clowe->clown__
 
 ## Työn mahdolliset puutteet ja parannusehdotukset
-Aiheesta löytyy runsaasti kirjallisuutta, joten puutteita ja parannusehdotuksia löytyy paljon. Tällä hetkellä olennaisimmat puutteet ovat käytetyn sanaston laajuus sekä se, että ohjelma ei huomioi tehdyn virheen laatua. Ihminen näkee helposti, että esimerkiksi lauseessa _i like digs_ korjauksen tulisi olla _i like dogs_, mutta tällä hetkellä ohjelma korjaa lauseen muotoon _a like digs_. 
+Aiheesta löytyy runsaasti kirjallisuutta, joten puutteita ja parannusehdotuksia löytyy paljon. Tässä listattuna muutamia tärkeimpiä parannusehdotuksia:
+1. Kontekstin huomioon ottaminen
+2. Sanaston laajentaminen
+3. Mahdollisten virheiden määrän kasvattaminen
+4. Virheen laadun arviointi
+
+### Kontekstin huomioon ottaminen
+Tämä lienee tärkein parannus, joka ohjelmaan voitaisiin tehdä. Koska kontekstia ei huomioida, yleisesti käytetyt sanat tulevat useammin suositelluksi kuin harvemmin käytetyt. Kontekstin huomioon ottaminen mahdollistaisi myös ongelman #3 ratkaisemisen, sillä kontekstin avulla voitaisiin filtteröidä iso joukko sanoista pois.
+
+### Sanaston laajentaminen
+Tähän kaatuu monet kääntämisyritykset, sillä mikäli sanaa ei löydy sanastosta ei sitä myöskään korjata oikein. 
+
+### Mahdollisten virheiden määrän kasvattaminen
+Tällä hetkellä ohjelma toimii liian hitaasti, mikäli sanalle annetaan esimerkiksi kolme typoa. Tämä johtuu siitä, että etenkin lyhyille sanoille löytyy tällöin valtava määrä korjausehdotuksia. 
+
+### Virheen laadun arviointi
+Monet kirjoitusvirheet ovat ihmiselle helposti ymmärrettävissä, mutta koneelle vaikeampia. Ohjelman tulisi antaa enemmän painoarvoa esimerkiksi typoille, joissa kirjaimet ovat vierekkäin näppäimistöllä (_foyl_ -> _foul_), kun samaa kirjainta laitetaan yksi liikaa tai liian vähän (_adres_ -> _address_) tai tietyille kirjaimille, jotka saatetaan sekoittaa toisiinsa (_assess_ -> _access_).  
 
 ## Lähteet
 - [http://norvig.com/spell-correct.html](http://norvig.com/spell-correct.html)

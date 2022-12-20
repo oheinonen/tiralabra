@@ -44,12 +44,6 @@ Erilaiset typot, jotka ohjelma tarkastaa ovat
 Näiden typojen avulla lasketaan sanojen Damerau-Levenshtein etäisyys. 
 Esim. sanojen _code_ ja _clown_ etäisyys on 3: __code->clode->clowe->clown__
 
-## Saavutetut aika- ja tilavaativuudet (m.m. O-analyysit pseudokoodista)
--
-
-## Suorituskyky- ja O-analyysivertailu (mikäli työ vertailupainotteinen)
--
-
 ## Työn mahdolliset puutteet ja parannusehdotukset
 Aiheesta löytyy runsaasti kirjallisuutta, joten puutteita ja parannusehdotuksia löytyy paljon. Tällä hetkellä olennaisimmat puutteet ovat käytetyn sanaston laajuus sekä se, että ohjelma ei huomioi tehdyn virheen laatua. Ihminen näkee helposti, että esimerkiksi lauseessa _i like digs_ korjauksen tulisi olla _i like dogs_, mutta tällä hetkellä ohjelma korjaa lauseen muotoon _a like digs_. 
 
